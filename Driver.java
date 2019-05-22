@@ -17,7 +17,8 @@ public class Driver
 			     int n=Math.abs(ob.nextInt()%1000); //mod it with 10^n+1 for random 10^n testcases
 			     String x="input\\input0"+t+".txt";
 			     Writer f=new FileWriter(new File(x));
-			     f.write(n);
+			     String xyz=n+"";
+			     f.write(xyz);
 			     f.write(System.getProperty("line.separator"));
 			     for(int i=0;i<n;i++)
 			     {
