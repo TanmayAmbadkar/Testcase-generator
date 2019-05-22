@@ -7,8 +7,8 @@ public class Driver
 	{
         try
         {
-            new File("/input");
-            new File("/output");
+            new File("\\input");
+            new File("\\output");
             Random ob=new Random();
             int tcfiles=10;  //set your number of testcase files;
 		    for(int t=0;t<tcfiles;t++)
