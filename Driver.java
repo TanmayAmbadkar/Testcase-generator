@@ -39,7 +39,7 @@ public class Driver
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("Report as issue on github, whatever error has been thrown");
         }
 	}
