@@ -41,13 +41,13 @@ public class Driver
         switch(lang)
         {
             case 1:
-                Runtime.getRuntime().exec("g++ logic.c -o logic");
+                Runtime.getRuntime().exec("\"g++ logic.c -o logic\"");
                 break;
             case 2:
-                Runtime.getRuntime().exec("g++ logic.cpp -o logic");
+                Runtime.getRuntime().exec("\"g++ logic.cpp -o logic\"");
                 break;
             case 3:
-                Runtime.getRuntime().exec("javac logic.java");
+                Runtime.getRuntime().exec("\"javac logic.java\"");
                 break;
             case 4:
                 break;
@@ -88,6 +88,7 @@ public class Driver
             case 4:
                 s=l[3]+s;
         }
+	s="\""+s+"\"";
         return s;
     }
     public static void main(String args[])throws IOException
