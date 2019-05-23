@@ -4,7 +4,7 @@ import java.math.*;
 import java.util.concurrent.TimeUnit;
 public class Driver
 {
-    static String l[]={"logic ", "./logic","java logic", "python logic.py"};
+    static String l[]={"logic", "./logic","java", "python"};
     //printing in file starts from here
     public static void makeTC(int tcfiles)
     {
@@ -56,18 +56,19 @@ public class Driver
         }
     }
     
-    public static String exec(String s,int os, int lang)
+    public static String[] exec(String s[],int os, int lang)
     {
+	
         switch(lang)
         {
             case 1:
                 switch(os)
                 {
                     case 1:
-                        s=l[0]+s;
+                        return new String[]{l[0],s[0],s[1]};
                         break;
                     case 2:
-                        s=l[1]+s;
+                        return new String[]{l[1],s[0],s[1]};
                         break;
                 }
                 break;
@@ -75,20 +76,19 @@ public class Driver
                 switch(os)
                 {
                     case 1:
-                        s=l[0]+s;
+                        return new String[]{l[0],s[0],s[1]};
                         break;
                     case 2:
-                        s=l[1]+s;
+                        return new String[]{l[1],s[0],s[1]};
                         break;
                 }
                 break;
             case 3:
-                s=l[2]+s;
+                return new String[]{l[2],"logic",s[0],s[1]};
                 break;
             case 4:
-                s=l[3]+s;
+                return new String[]{l[3],"logic.py",s[0],s[1]};
         }
-	s="\""+s+"\"";
         return s;
     }
     public static void main(String args[])throws IOException
@@ -117,7 +117,7 @@ public class Driver
 		    compile(lang);
             for(int i=0;i<tcfiles;i++)
             {
-                String s=exec("<input\\input0"+i+".txt >output\\output0"+i+".txt",os,lang);
+                String s[]=exec(new String[]{"<input0"+i+".txt",">output0"+i+".txt" },os,lang);
     	        long x=System.nanoTime();
                 Runtime.getRuntime().exec(s);
                 long y=System.nanoTime();
