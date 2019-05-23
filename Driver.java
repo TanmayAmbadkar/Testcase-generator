@@ -29,7 +29,7 @@ public class Driver
 	    		Runtime.getRuntime().exec("gcc logic.c -o logic");
             		for(int i=0;i<tcfiles;i++)
             		{
-                		String s="logic <input\\input0"+i+".txt >output\\output0"+i+".txt";
+                		String s="logic < input\\input0"+i+".txt > output\\output0"+i+".txt";
     	        		long x=System.nanoTime();
 	       			Process q=Runtime.getRuntime().exec(s);
 	       			long y=System.nanoTime();
