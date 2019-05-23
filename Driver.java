@@ -66,26 +66,25 @@ public class Driver
                 {
                     case 1:
                         return new String[]{l[0],s[0],s[1]};
-                        break;
+
                     case 2:
                         return new String[]{l[1],s[0],s[1]};
-                        break;
+
                 }
-                break;
+
             case 2:
                 switch(os)
                 {
                     case 1:
                         return new String[]{l[0],s[0],s[1]};
-                        break;
+
                     case 2:
                         return new String[]{l[1],s[0],s[1]};
-                        break;
                 }
-                break;
+
             case 3:
                 return new String[]{l[2],"logic",s[0],s[1]};
-                break;
+
             case 4:
                 return new String[]{l[3],"logic.py",s[0],s[1]};
         }
