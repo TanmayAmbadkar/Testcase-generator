@@ -117,7 +117,7 @@ public class Driver
 		    compile(lang);
             for(int i=0;i<tcfiles;i++)
             {
-                String s=exec("logic <input\\input0"+i+".txt >output\\output0"+i+".txt",os,lang);
+                String s=exec("<input\\input0"+i+".txt >output\\output0"+i+".txt",os,lang);
     	        long x=System.nanoTime();
                 Runtime.getRuntime().exec(s);
                 long y=System.nanoTime();
