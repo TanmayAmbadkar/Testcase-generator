@@ -90,8 +90,8 @@ public class Driver
         }
         return s;
     }
-	public static void main(String args[])throws IOException
-	{
+    public static void main(String args[])throws IOException
+    {
         Scanner in=new Scanner(System.in);
         System.out.println("Enter number of TCfiles");
         int tcfiles=in.nextInt(); 
@@ -129,5 +129,5 @@ public class Driver
             e.printStackTrace();
             System.out.println("Report as issue on github, whatever error has been thrown");
         }
-	}
+    }
 }
