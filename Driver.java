@@ -10,20 +10,31 @@ public class Driver
     {
         try
         {
-            new File("/input");
-            new File("/output");
+            new File("input").mkdir();
+            new File("output").mkdir();
             Random ob=new Random();
             for(int t=0;t<tcfiles;t++)
 		    {
                  System.out.println("Generating Testcase: "+t);
-			     int n=Math.abs(ob.nextInt()%1000); //mod it with 10^n+1 for random 10^n testcases
-			     String x="input\\input0"+t+".txt";
-			     Writer f=new FileWriter(new File(x));
-			     f.write(n);
+			     int n=Math.abs(ob.nextInt()%1000000); //mod it with 10^n+1 for random 10^n testcases
+			     String x="input\\input0"+t+".txt";;
+			     Writer f=new FileWriter(new File(x))
+			     f.write(n+" ");
 			     f.write(System.getProperty("line.separator"));
 			     for(int i=0;i<n;i++)
 			     {
-                    f.write(Math.abs(ob.nextInt()%1000)+" ");
+					int a=Math.abs(ob.nextInt()%100000);
+					int b=Math.abs(ob.nextInt()%100000);
+					int c=Math.abs(ob.nextInt()%100000);
+					int d=Math.abs(ob.nextInt()%100000);
+					int e=Math.abs(ob.nextInt()%100000);
+					int g=Math.abs(ob.nextInt()%100000);
+					f.write(a+" ");
+					f.write(b+" ");
+					f.write(c+" ");
+					f.write(d+" ");
+					f.write(e+" ");
+					f.write(g+" ");
                     f.write(System.getProperty("line.separator"));
 			     }
 			     f.close();
@@ -47,7 +58,7 @@ public class Driver
                 Runtime.getRuntime().exec("\"g++ logic.cpp -o logic\"");
                 break;
             case 3:
-                Runtime.getRuntime().exec("\"javac logic.java\"");
+                Runtime.getRuntime().exec("javac logic.java");
                 break;
             case 4:
                 break;
