@@ -16,9 +16,9 @@ public class Driver
             for(int t=0;t<tcfiles;t++)
 		    {
                  System.out.println("Generating Testcase: "+t);
-			     int n=Math.abs(ob.nextInt()%1000000); //mod it with 10^n+1 for random 10^n testcases
+			     int n=Math.abs(100000); //mod it with 10^n+1 for random 10^n testcases
 			     String x="input\\input0"+t+".txt";;
-			     Writer f=new FileWriter(new File(x))
+			     Writer f=new FileWriter(new File(x));
 			     f.write(n+" ");
 			     f.write(System.getProperty("line.separator"));
 			     for(int i=0;i<n;i++)
@@ -49,25 +49,35 @@ public class Driver
     
     public static void compile(int lang)throws IOException
     {
-        switch(lang)
-        {
-            case 1:
-                Runtime.getRuntime().exec("\"g++ logic.c -o logic\"");
-                break;
-            case 2:
-                Runtime.getRuntime().exec("\"g++ logic.cpp -o logic\"");
-                break;
-            case 3:
-                Runtime.getRuntime().exec("javac logic.java");
-                break;
-            case 4:
-                break;
-            default:
-                System.out.println("Wrong choice");
-        }
+		try
+		{
+			switch(lang)
+			{
+				case 1:
+					Process p=Runtime.getRuntime().exec("cmd /c start cmd.exe /K \""+"gcc logic.c -o logic && exit\"");
+					p.waitFor();
+					break;
+				case 2:
+					p=Runtime.getRuntime().exec("cmd /c start cmd.exe /K \""+"g++ logic.cpp -o logic && exit\"");
+					p.waitFor();
+					break;
+				case 3:
+					p=Runtime.getRuntime().exec("cmd /c start cmd.exe /K \""+"javac logic.java && exit\"");
+					p.waitFor();
+					break;
+				case 4:
+					break;
+				default:
+					System.out.println("Wrong choice");
+			}
+		}
+		catch(Exception E)
+		{
+			System.out.println("Something went wrong, please check whether the compiler is integrted with your terminal");
+		}
     }
     
-    public static String[] exec(String s[],int os, int lang)
+    public static String exec(String s[],int os, int lang)
     {
 	
         switch(lang)
@@ -76,10 +86,10 @@ public class Driver
                 switch(os)
                 {
                     case 1:
-                        return new String[]{l[0],s[0],s[1]};
+                        return l[0]+" "+s[0]+" "+s[1];
 
                     case 2:
-                        return new String[]{l[1],s[0],s[1]};
+                        return l[1]+" "+s[0]+" "+s[1];
 
                 }
 
@@ -87,19 +97,19 @@ public class Driver
                 switch(os)
                 {
                     case 1:
-                        return new String[]{l[0],s[0],s[1]};
+                        return l[0]+" "+s[0]+" "+s[1];
 
                     case 2:
-                        return new String[]{l[1],s[0],s[1]};
+                        return l[1]+" "+s[0]+" "+s[1];
                 }
 
             case 3:
-                return new String[]{l[2],"logic",s[0],s[1]};
+                return l[2]+" logic "+s[0]+" "+s[1];
 
             case 4:
-                return new String[]{l[3],"logic.py",s[0],s[1]};
+                return l[3]+" logic.py "+s[0]+" "+s[1];
         }
-        return s;
+		return "";
     }
     public static void main(String args[])throws IOException
     {
@@ -110,28 +120,21 @@ public class Driver
         int os=0,lang=0;
         try
         {
-            TimeUnit.SECONDS.sleep(3);
-            System.out.flush();  
+			System.out.println("TC Files generated");
+            TimeUnit.SECONDS.sleep(1);
             System.out.println("Enter 1 for Windows\n2 for Linux");
             os=in.nextInt();
             System.out.println("Enter 1 for c\n2 for c++\n3 for Java\n4 for python");
             lang=in.nextInt();
-        }
-        catch(InterruptedException ie)
-        {
-            Thread.currentThread().interrupt();
-        }
-        
-        try
-        {
-		    compile(lang);
-            for(int i=0;i<tcfiles;i++)
+			compile(lang);
+            System.out.println("If the compile window has closed, press any character key, then enter");
+			String temp=in.next();
+			for(int i=0;i<tcfiles;i++)
             {
-                String s[]=exec(new String[]{"<input0"+i+".txt",">output0"+i+".txt" },os,lang);
-    	        long x=System.nanoTime();
-                Runtime.getRuntime().exec(s);
-                long y=System.nanoTime();
-                System.out.println("Time taken to execute test case "+i+" is:"+((y-x)/1000000000.0));
+                String s=exec(new String[]{"<input/input0"+i+".txt",">output/output0"+i+".txt" },os,lang);
+				s="cmd /c start cmd.exe /K \""+s+" && exit\"";
+				Runtime.getRuntime().exec(s);
+                System.out.println("Test Case: "+i+" executed successfully");
             }
 		    System.out.println("All programs run successfully");
         }
