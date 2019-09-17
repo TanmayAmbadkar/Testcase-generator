@@ -4,109 +4,15 @@ import java.math.*;
 import java.util.concurrent.TimeUnit;
 public class Driver
 {
-    static String l[]={"logic", "./logic","java", "python"};
-    //printing in file starts from here
-    public static void makeTC(int tcfiles)
-    {
-        try
-        {
-            new File("input").mkdir();
-            new File("output").mkdir();
-            Random ob=new Random();
-            for(int t=0;t<tcfiles;t++)
-		    {
-				System.out.println("Generating Testcase: "+t);
-				int n=500000; //mod it with 10^n+1 for random 10^n testcases
-				String x="input\\input0"+t+".txt";;
-				Writer f=new FileWriter(new File(x));
-				f.write(n+" ");
-				f.write(System.getProperty("line.separator"));
-				for(int i=0;i<n;i++)
-				{
-					long len=Math.abs(ob.nextLong()%1000000000);
-					f.write(len+" ");
-					f.write(System.getProperty("line.separator"));
-				}
-				f.close();
-		    }
-        }
-        catch(Exception E)
-        {
-            E.printStackTrace();
-            System.out.println("Report above exception on GitHub in the repository : https://github.com/TanmayAmbadkar/Testcase-generator");
-        }            
-    }
-    
-    public static void compile(int lang)throws IOException
-    {
-		try
-		{
-			switch(lang)
-			{
-				case 1:
-					Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"gcc logic.c -o logic && exit\"");
-					p.waitFor();
-					break;
-				case 2:
-					p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"g++ logic.cpp -o logic && exit\"");
-					p.waitFor();
-					break;
-				case 3:
-					p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"javac logic.java && exit\"");
-					p.waitFor();
-					break;
-				case 4:
-					break;
-				default:
-					System.out.println("Wrong choice");
-			}
-		}
-		catch(Exception E)
-		{
-			System.out.println("Something went wrong, please check whether the compiler is integrted with your terminal");
-		}
-    }
-    
-    public static String exec(String s[],int os, int lang)
-    {
-	
-        switch(lang)
-        {
-            case 1:
-                switch(os)
-                {
-                    case 1:
-                        return l[0]+" "+s[0]+" "+s[1];
-
-                    case 2:
-                        return l[1]+" "+s[0]+" "+s[1];
-
-                }
-
-            case 2:
-                switch(os)
-                {
-                    case 1:
-                        return l[0]+" "+s[0]+" "+s[1];
-
-                    case 2:
-                        return l[1]+" "+s[0]+" "+s[1];
-                }
-
-            case 3:
-                return l[2]+" logic "+s[0]+" "+s[1];
-
-            case 4:
-                return l[3]+" logic.py "+s[0]+" "+s[1];
-        }
-		return "";
-    }
     public static void main(String args[])throws IOException
     {
         Scanner in=new Scanner(System.in);
+	TCCreation tcgen = new TCCreation();
+	Compile compiler = new Compile();
+	ExecuteTC excuter=new ExecuteTC();
         System.out.println("Enter number of TCfiles");
         int tcfiles=in.nextInt(); 
-        makeTC(tcfiles);
+        tcgen.makeTC(tcfiles);
         int os=0,lang=0;
         try
         {
@@ -116,11 +22,11 @@ public class Driver
             os=in.nextInt();
             System.out.println("Enter 1 for c\n2 for c++\n3 for Java\n4 for python");
             lang=in.nextInt();
-			compile(lang);
+			compiler.compile(lang);
             System.out.println("Code Compiled successfully");
 			for(int i=0;i<tcfiles;i++)
             {
-                String s=exec(new String[]{"<input/input0"+i+".txt",">output/output0"+i+".txt" },os,lang);
+                String s=excuter.exec(new String[]{"<input/input0"+i+".txt",">output/output0"+i+".txt" },os,lang);
 				s="cmd /c start /wait cmd.exe /K \""+s+" && exit\"";
 				long st=System.nanoTime();
 				Process p=Runtime.getRuntime().exec(s);
