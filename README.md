@@ -3,9 +3,9 @@ Really wanted to try making one in java, to learn a good amount of file handling
 Keep the name of your file logic, followed by the respective extension.
 
 # How to use
-Open the code, find the input area function.
-Print whatever you want in that function.
-Place the logic file in the same folder as the Driver.java file.
+Step 1) Open the TCCreation.java file, and write down the format of your test cases. 
+Step 2) Place the logic file in the same folder as the Driver.java file. Name this file logic.\*, where \* is the extension of your logic file
+Step 3) Run the driver program
 
 In your Command prompt, type the following
 1) javac Driver.java
