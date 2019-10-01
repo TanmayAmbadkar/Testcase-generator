@@ -15,4 +15,7 @@ In your Command prompt, type the following
 
 The code does the rest of the work for you.
 
+# What the code does
+
+The code randomly generates the test cases (These test cases might not include the edge test cases). Then it executed them and zips them into 2 folders, input and output. 
 
