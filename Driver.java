@@ -7,9 +7,9 @@ public class Driver
     public static void main(String args[])throws IOException
     {
         Scanner in=new Scanner(System.in);
-	TCCreation tcgen = new TCCreation();
-	Compile compiler = new Compile();
-	ExecuteTC excuter=new ExecuteTC();
+		TCCreation tcgen = new TCCreation();
+		Compile compiler = new Compile();
+		ExecuteTC executer=new ExecuteTC();
         System.out.println("Enter number of TCfiles");
         int tcfiles=in.nextInt(); 
         tcgen.makeTC(tcfiles);
@@ -22,11 +22,11 @@ public class Driver
             os=in.nextInt();
             System.out.println("Enter 1 for c\n2 for c++\n3 for Java\n4 for python");
             lang=in.nextInt();
-			compiler.compile(lang);
+			compiler.compile(lang,os);
             System.out.println("Code Compiled successfully");
 			for(int i=0;i<tcfiles;i++)
             {
-                String s=excuter.exec(new String[]{"<input/input0"+i+".txt",">output/output0"+i+".txt" },os,lang);
+                String s=executer.exec(new String[]{"<input/input0"+i+".txt",">output/output0"+i+".txt" },os,lang);
 				s="cmd /c start /wait cmd.exe /K \""+s+" && exit\"";
 				long st=System.nanoTime();
 				Process p=Runtime.getRuntime().exec(s);
