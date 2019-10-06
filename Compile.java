@@ -19,17 +19,8 @@ public class Compile
 					p.waitFor();
 					break;
 				case 3:
-					switch(os)
-					{
-						case 1:
-							Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"javac logic.java && exit\"");
-							p.waitFor();
-							break;
-						case 2:
-							p=Runtime.getRuntime().exec("javac logic.java");
-							p.waitFor();
-							break;
-					}
+					Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"javac logic.java && exit\"");
+					p.waitFor();
 					break;
 				case 4:
 					break;
