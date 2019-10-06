@@ -4,24 +4,15 @@ import java.math.*;
 import java.util.concurrent.TimeUnit;
 public class Compile
 {
-	public void compile(int lang,int os)throws IOException
+	public void compile(int lang)throws IOException
     {
 		try
 		{
 			switch(lang)
 			{
 				case 1:
-					switch(os)
-					{
-						case 1:
-							Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"gcc logic.c -o logic && exit\"");
-							p.waitFor();
-							break;
-						case 2:
-							p=Runtime.getRuntime().exec("gcc logic.c -o logic");
-							p.waitFor();
-							break;
-					}
+					Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"gcc logic.c -o logic && exit\"");
+					p.waitFor();
 					break;
 				case 2:
 					switch(os)
