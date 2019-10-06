@@ -15,17 +15,8 @@ public class Compile
 					p.waitFor();
 					break;
 				case 2:
-					switch(os)
-					{
-						case 1:
-							Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"g++ logic.cpp -o logic && exit\"");
-							p.waitFor();
-							break;
-						case 2:
-							p=Runtime.getRuntime().exec("g++ logic.cpp -o logic");
-							p.waitFor();
-							break;
-					}
+					Process p=Runtime.getRuntime().exec("cmd /c start /wait cmd.exe /K \""+"g++ logic.cpp -o logic && exit\"");
+					p.waitFor();
 					break;
 				case 3:
 					switch(os)
